@@ -72,7 +72,6 @@ function App() {
   const handleSubmit = () => {
     setErrorMessage(null);
     register(nickname, username, password).then((data) => {
-      console.log(data);
       if (data.ok !== 1) {
         setErrorMessage(data.message);
         return;
