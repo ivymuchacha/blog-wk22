@@ -22,7 +22,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://ivymuchacha.github.io/blog-wk22/relativepath",
+  "homepage": "https://ivymuchacha.github.io/blog-wk22",
   "eslintConfig": {
     "extends": [
       "react-app",

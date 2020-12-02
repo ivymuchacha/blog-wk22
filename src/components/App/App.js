@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import Navbar from "../Navbar";
 import Homepage from "../Pages/Homepage";
@@ -34,7 +34,7 @@ function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <Root>
-        <Router basename="/">
+        <Router>
           <Navbar />
           <Switch>
             <Route exact path="/">
