@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { getPosts } from "../../../WebAPI";
+import { MEDIA_QUERY } from "../../../utils";
 
 const Root = styled.div`
   margin: 0 auto;
   width: 80%;
+  ${MEDIA_QUERY} {
+    width: 95%;
+  }
 `;
 
 const PostContainer = styled.div`
@@ -15,6 +20,9 @@ const PostContainer = styled.div`
   padding: 20px;
   :hover {
     background: #bfc0c0;
+  }
+  ${MEDIA_QUERY} {
+    display: block;
   }
 `;
 
@@ -26,6 +34,9 @@ const PostTitle = styled(Link)`
 
 const PostTime = styled.div`
   color: #4f5d75;
+  ${MEDIA_QUERY} {
+    padding-top: 10px;
+  }
 `;
 
 function Post({ post }) {
@@ -37,7 +48,7 @@ function Post({ post }) {
   );
 }
 
-function App() {
+function Homepage() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -53,4 +64,8 @@ function App() {
   );
 }
 
-export default App;
+export default Homepage;
+
+Post.propTypes = {
+  post: PropTypes.object,
+};

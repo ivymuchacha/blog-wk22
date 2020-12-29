@@ -11,10 +11,13 @@ import Page from "../Pages/Page";
 import AboutPage from "../Pages/About";
 import { AuthContext } from "../../context";
 import { getMe } from "../../WebAPI";
-import { getAuthToken } from "../../utils";
+import { getAuthToken, MEDIA_QUERY } from "../../utils";
 
 const Root = styled.div`
   padding-top: 64px;
+  ${MEDIA_QUERY} {
+    padding-top: 130px;
+  }
 `;
 
 function App() {

@@ -1,41 +1,66 @@
 import React, { useState, useContext } from "react";
+import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { login, getMe } from "../../../WebAPI";
-import { setAuthToken } from "../../../utils";
+import { setAuthToken, MEDIA_QUERY } from "../../../utils";
 import { AuthContext } from "../../../context";
 
 const Root = styled.div`
   margin: 0 auto;
   width: 80%;
+  ${MEDIA_QUERY} {
+    width: 95%;
+  }
 `;
 
-const LoginBoard = styled.form`
+const LoginForm = styled.form`
   background: #ef8354;
   margin: 10%;
-  height: 280px;
+  height: 300px;
+  border: 1px solid #ef8354;
   align-items: center;
   text-align: center;
-  border: 1px solid #ef8354;
-  padding-top: 40px;
+
+  ${MEDIA_QUERY} {
+    margin: 5% 0;
+    height: 400px;
+  }
 `;
 const Title = styled.h2`
   color: #ffffff;
+  margin: 35px;
+  ${MEDIA_QUERY} {
+    font-size: 24px;
+    margin: 20px;
+  }
 `;
 const InputContent = styled.div`
   margin: 10px 0;
   display: flex;
   justify-content: center;
+  ${MEDIA_QUERY} {
+    display: block;
+  }
 `;
 const InputName = styled.div`
   font-size: 16px;
   color: #ffffff;
+  ${MEDIA_QUERY} {
+    font-size: 20px;
+    margin: 10px;
+  }
 `;
 
 const Input = styled.input`
   padding: 5px;
   width: 200px;
   border: none;
+  ${MEDIA_QUERY} {
+    padding: 10px;
+    width: 80%;
+    font-size: 16px;
+  }
 `;
 
 const Button = styled.button`
@@ -46,10 +71,17 @@ const Button = styled.button`
   color: #ef8354;
   cursor: pointer;
   border-radius: 5px;
+  ${MEDIA_QUERY} {
+    padding: 15px 20px;
+    font-size: 16px;
+  }
 `;
 
 const ErrorMessage = styled.h3`
   color: #2d3142;
+  ${MEDIA_QUERY} {
+    margin: 5px;
+  }
 `;
 
 function LoginInput({ inputName, inputType, value, onChange }) {
@@ -63,14 +95,22 @@ function LoginInput({ inputName, inputType, value, onChange }) {
   );
 }
 
-function App() {
+LoginInput.propTypes = {
+  inputName: PropTypes.string.isRequired,
+  inputType: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
+function Loginpage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const history = useHistory();
   const { setUser } = useContext(AuthContext);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     setErrorMessage(null);
     login(username, password).then((data) => {
       if (data.ok === 0) {
@@ -93,7 +133,7 @@ function App() {
 
   return (
     <Root>
-      <LoginBoard onSubmit={handleSubmit}>
+      <LoginForm onSubmit={handleSubmit}>
         <Title>Login</Title>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <LoginInput
@@ -113,9 +153,9 @@ function App() {
           }}
         />
         <Button>Submit</Button>
-      </LoginBoard>
+      </LoginForm>
     </Root>
   );
 }
 
-export default App;
+export default Loginpage;

@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { newPost } from "../../../WebAPI";
+import { MEDIA_QUERY } from "../../../utils";
 
 const Root = styled.div`
   margin: 0 auto;
   width: 80%;
+  ${MEDIA_QUERY} {
+    width: 95%;
+  }
 `;
 
 const PostBoard = styled.form`
@@ -16,6 +21,10 @@ const PostBoard = styled.form`
   text-align: center;
   border: 1px solid #ef8354;
   padding-top: 40px;
+  ${MEDIA_QUERY} {
+    margin: 5% 0;
+    height: 550px;
+  }
 `;
 const Title = styled.h2`
   color: #ffffff;
@@ -24,6 +33,10 @@ const InputContent = styled.div`
   width: 450px;
   margin: 0 auto;
   text-align: left;
+  ${MEDIA_QUERY} {
+    width: 95%;
+    font-size: 16px;
+  }
 `;
 const InputName = styled.div`
   font-size: 18px;
@@ -34,6 +47,10 @@ const Input = styled.textarea`
   padding: 5px;
   width: 450px;
   border: none;
+  ${MEDIA_QUERY} {
+    width: 95%;
+    font-size: 16px;
+  }
 `;
 
 const Button = styled.button`
@@ -44,6 +61,10 @@ const Button = styled.button`
   color: #ef8354;
   cursor: pointer;
   border-radius: 5px;
+  ${MEDIA_QUERY} {
+    padding: 15px 20px;
+    font-size: 16px;
+  }
 `;
 
 const ErrorMessage = styled.h3`
@@ -60,7 +81,15 @@ function PostInput({ inputName, inputType, value, onChange, rows }) {
   );
 }
 
-function App() {
+PostInput.propTypes = {
+  inputName: PropTypes.string.isRequired,
+  inputType: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  rows: PropTypes.string.isRequired,
+};
+
+function NewPost() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
@@ -108,4 +137,4 @@ function App() {
   );
 }
 
-export default App;
+export default NewPost;

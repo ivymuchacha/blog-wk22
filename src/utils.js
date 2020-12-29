@@ -1,9 +1,7 @@
 const TOKEN_NAME = "token";
 
-export const setAuthToken = (token) => {
-  return localStorage.setItem(TOKEN_NAME, token);
-};
+export const setAuthToken = (token) => localStorage.setItem(TOKEN_NAME, token);
 
-export const getAuthToken = () => {
-  return localStorage.getItem(TOKEN_NAME);
-};
+export const getAuthToken = () => localStorage.getItem(TOKEN_NAME);
+
+export const MEDIA_QUERY = "@media screen and (max-width: 768px)";

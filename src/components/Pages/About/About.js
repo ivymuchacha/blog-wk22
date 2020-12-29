@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { MEDIA_QUERY } from "../../../utils";
 
 const Root = styled.div`
   margin: 0 auto;
   width: 80%;
+
+  ${MEDIA_QUERY} {
+    width: 95%;
+  }
 `;
 
 const PostContainer = styled.div`
@@ -27,7 +32,7 @@ const PostContent = styled.div`
   white-space: break-spaces;
 `;
 
-function App() {
+function About() {
   return (
     <Root>
       <PostContainer>
@@ -38,4 +43,4 @@ function App() {
   );
 }
 
-export default App;
+export default About;

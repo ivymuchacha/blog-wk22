@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getPost } from "../../../WebAPI";
+import { MEDIA_QUERY } from "../../../utils";
 
 const Root = styled.div`
   margin: 0 auto;
   width: 80%;
+  ${MEDIA_QUERY} {
+    width: 95%;
+  }
 `;
 
 const PostContainer = styled.div`
@@ -13,6 +17,9 @@ const PostContainer = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid grey;
   padding: 20px;
+  ${MEDIA_QUERY} {
+    display: block;
+  }
 `;
 
 const PostTitle = styled.div`
@@ -23,6 +30,9 @@ const PostTitle = styled.div`
 
 const PostTime = styled.div`
   color: #4f5d75;
+  ${MEDIA_QUERY} {
+    padding-top: 10px;
+  }
 `;
 
 const PostContent = styled.div`
@@ -33,7 +43,7 @@ const PostContent = styled.div`
   white-space: break-spaces;
 `;
 
-function App() {
+function Page() {
   const [post, setPost] = useState([]);
   const { id } = useParams();
   useEffect(() => {
@@ -51,4 +61,4 @@ function App() {
   );
 }
 
-export default App;
+export default Page;

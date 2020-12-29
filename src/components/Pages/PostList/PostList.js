@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { getSomePosts, getPosts } from "../../../WebAPI";
+import { MEDIA_QUERY } from "../../../utils";
 
 const Root = styled.div`
   margin: 0 auto;
   width: 80%;
+  ${MEDIA_QUERY} {
+    width: 95%;
+  }
 `;
 
 const PostContainer = styled.div`
@@ -15,6 +20,9 @@ const PostContainer = styled.div`
   padding: 20px;
   :hover {
     background: #bfc0c0;
+  }
+  ${MEDIA_QUERY} {
+    display: block;
   }
 `;
 
@@ -26,6 +34,9 @@ const PostTitle = styled(Link)`
 
 const PostTime = styled.div`
   color: #4f5d75;
+  ${MEDIA_QUERY} {
+    padding-top: 10px;
+  }
 `;
 
 const Paginator = styled.div`
@@ -53,7 +64,11 @@ function Post({ post }) {
   );
 }
 
-function App() {
+Post.propTypes = {
+  post: PropTypes.object,
+};
+
+function PostList() {
   const [posts, setPosts] = useState([]);
   const [pages, setPages] = useState([1]);
   const [allPages, setAllPages] = useState([]);
@@ -61,7 +76,7 @@ function App() {
   useEffect(() => {
     getPosts().then((item) => {
       const listOfPage = [];
-      for (let i = 1; i <= Math.ceil(item.length / 5); i++) {
+      for (let i = 1; i <= Math.ceil(item.length / 5); i += 1) {
         listOfPage.push(i);
       }
       setAllPages(listOfPage);
@@ -92,4 +107,4 @@ function App() {
   );
 }
 
-export default App;
+export default PostList;
